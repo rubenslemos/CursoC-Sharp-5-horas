@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using static System.Console;
 
 namespace CursoC_Sharp_5_horas
@@ -9,64 +6,56 @@ namespace CursoC_Sharp_5_horas
     internal class Program
     {
         //criação de um Enum
-
-        enum Carros 
-        { 
-            Porshe = 02,
-            Ferrari = 04,
-            Masserati = 06,
-            Lamborguini = 08,
-            Audi = 10,
-            Mercedes_Benz = 12,
-            BMW = 14,
-            McLaren = 16,
-            Aston_Martin = 18 
-        }
+        enum Carros { Porshe=02, Ferrari=04, Masserati=06, Lamborguini=08, Audi=10, Mercedes=12, BMW=14, McLaren=16, Aston_Martin=18 }
         static void Main(string[] args)
         {
-            Carros[] naFormula1 = new Carros[] { Carros.Ferrari, Carros.Mercedes_Benz, Carros.McLaren, Carros.Aston_Martin };
-            WriteLine("Qual carro você mais gosta: \n1"+(Carros)02 +"\n2"+(Carros)04+"\n3"+(Carros)06+"\n4"
-                +(Carros)08+"\n5"+(Carros)10+"\n6"+(Carros)12+"\n7"+(Carros)14+"\n8"+(Carros)16+"\n9"+(Carros)18);
-            int index = int.Parse(ReadLine());
-            switch (index)
+            int index;
+            int n = 1;
+            int c = 0;
+            Carros[] carros = new Carros[] {(Carros)02, (Carros)04, (Carros)06, (Carros)08, (Carros)10, (Carros)12, (Carros)14, (Carros)16, (Carros)18 };
+            do
             {
-                case 1:
-                    WriteLine(Carros.Porshe);
-                    break;
-                case 2:
-                    WriteLine(Carros.Ferrari);
-                    break;
-                case 3:
-                    WriteLine(Carros.Masserati);
-                    break;
-                case 4:
-                    WriteLine(Carros.Lamborguini);
-                    break;
-                case 5:
-                    WriteLine(Carros.Audi);
-                    break;
-                case 6:
-                    WriteLine(Carros.Mercedes_Benz);
-                    break;
-                case 7:
-                    WriteLine(Carros.BMW);
-                    break;
-                case 8:
-                    WriteLine(Carros.McLaren);
-                    break;
-                default:
-                    WriteLine(Carros.Aston_Martin);
-                    break;
+                WriteLine(" Escolha um carro:");
+
+                foreach (Carros carro in carros)
+                {
+                    Write("\n 0" + n + " " + carro);
+                    n++;
+                }
+                Write("\n 00 Sair \n Sua Escolha: 0");
+                index = int.Parse(ReadLine());
+                switch (index)
+                {
+                    case 1: WriteLine("\n Escolheu: " + Carros.Porshe + "\n"); break;
+                    case 2: WriteLine("\n Escolheu: " + Carros.Ferrari + "\n"); break;
+                    case 3: WriteLine("\n Escolheu: " + Carros.Masserati + "\n"); break;
+                    case 4: WriteLine("\n Escolheu: " + Carros.Lamborguini + "\n"); break;
+                    case 5: WriteLine("\n Escolheu: " + Carros.Audi + "\n"); break;
+                    case 6: WriteLine("\n Escolheu: " + Carros.Mercedes + "\n"); break;
+                    case 7: WriteLine("\n Escolheu: " + Carros.BMW + "\n"); break;
+                    case 8: WriteLine("\n Escolheu: " + Carros.McLaren + "\n"); break;
+                    case 9: WriteLine("\n Escolheu: " + Carros.Aston_Martin + "\n"); break;
+                    case 0: WriteLine("\n FIM \n"); break;
+                }
+                    c++;
+            } while (index != 0);
+            WriteLine(" Foram escolhidos " + --c + " carro(s)");
+
+            Carros[] naFormula1 = new Carros[] { Carros.Ferrari, Carros.Mercedes, Carros.McLaren, Carros.Aston_Martin };
+            foreach (Carros formula in naFormula1)
+            {
+                Write(" " + formula);
+                WriteLine(" Id : " + (int)formula);
             }
-            WriteLine(naFormula1[0] +"  "+ naFormula1[1] + "  " + naFormula1[2] + "  " + naFormula1[3]);
-            WriteLine((int)naFormula1[0] + "  " + (int)naFormula1[1] + "  " + (int)naFormula1[2] + "  " + (int)naFormula1[3]);
-            WriteLine((int)naFormula1[0] + (int)naFormula1[1] + (int)naFormula1[2] + (int)naFormula1[3]);
+            c = 0;
+            for (int i = 0; i < naFormula1.Length; ++i)
+            {
+                c = c+(int)naFormula1[i];
+            }
+            WriteLine(" Somatório dos Ids: "+c);
 
             int velocidade=0;
             bool boxes=true;
-            SwitchCase();
-            string [] familia = new string[] { " rubens", " iara", " lili", " chicao", " antonio", " dinda" };
-            WriteLine(familia[0] + familia[1]+familia[2]+familia[3]+familia[4]+familia[5]);
             string fim = (Condicional(velocidade, boxes));
             WriteLine(fim);
             ReadLine();
@@ -74,59 +63,28 @@ namespace CursoC_Sharp_5_horas
         static string Condicional (int velocidade, bool boxes)
         {   
             string condicao;
-            string fim = "\n Fim";
-            WriteLine("\n Pergunta: ");
-            Write(" Um carro de formula 1 pode chegar aos (km/h): ");
-            velocidade = Math.Abs(int.Parse(ReadLine()));
-            if (velocidade < 60 || velocidade > 400) { boxes = false; }
-            else { Write(" O carro está nos Boxes(true/false): "); boxes = bool.Parse(ReadLine()); }
-            if (velocidade != 60 && velocidade < 400 && !boxes == true) { condicao = " pode sim"; }
-            else if (velocidade == 60 && boxes == false) { condicao = " pode sim"; }
-            else if (velocidade != 60 && velocidade <= 400 && boxes == true) { condicao = " pode sim, mas fora dos Boxes"; }
-            else if ((velocidade == 60 && boxes == true) || (velocidade == 400 && boxes == false))
-            { condicao = " pode sim, esté um dos limites que podem ser atingidos: \n 60km/h nos Boxes \n 400km/h em qualquer outra situação"; }
-            else { condicao = " não pode"; }
-            Write(condicao);
-            WriteLine("");
-            return fim;
-        }
-        static void SwitchCase()
-        {
-            int nota;
-            Write("Qual a sua nota final: ");
-            nota = int.Parse(ReadLine());
-            switch (nota)
+            string fim = "\n ";
+            while (fim != "fim")
             {
-                case int n when (n <= 40):
-                    WriteLine("Muito burro");
-                    break;
-                case int n when (n> 40 && n <= 50):
-                    WriteLine("burro");
-                    break;                
-                case int n when (n> 50 && n <= 59):
-                    WriteLine("Faltou estudar um pouco");
-                    break;
-                case int n when (n == 60):
-                    WriteLine("Ajudado pelo professor, certeza!");
-                    break;
-                case int n when (n> 60 && n <= 69):
-                    WriteLine("Passou por pouco");
-                    break;
-                case int n when (n> 69 && n <= 79):
-                    WriteLine("Não fez mais que a obrigação");
-                    break;
-                case int n when (n> 79 && n <= 89):
-                    WriteLine("Mandou bem, Parabéns");
-                    break;
-                case int n when (n> 89 && n <= 99):
-                    WriteLine("Olha o geninho ai...");
-                    break;
-                case int n when (n == 100):
-                    WriteLine("CDF não tem como negar!");
-                    break;
-
+                WriteLine("\n Pergunta: ");
+                Write(" Um carro de formula 1 pode chegar aos (km/h): ");
+                velocidade = Math.Abs(int.Parse(ReadLine()));
+                if (velocidade < 60 || velocidade > 400) { boxes = false; }
+                else { Write(" O carro está nos Boxes(true/false): "); boxes = bool.Parse(ReadLine()); }
+                if (velocidade != 60 && velocidade < 400 && !boxes == true) { condicao = " pode sim"; }
+                else if (velocidade == 60 && boxes == false) { condicao = " pode sim"; }
+                else if (velocidade != 60 && velocidade <= 400 && boxes == true) { condicao = " pode sim, mas fora dos Boxes"; }
+                else if ((velocidade == 60 && boxes == true) || (velocidade == 400 && boxes == false))
+                { condicao = " pode sim, esté um dos limites que podem ser atingidos: \n 60km/h nos Boxes \n 400km/h em qualquer outra situação"; }
+                else { condicao = " não pode"; }
+                Write(condicao);
+                WriteLine("");
+                Write("Deseja saber mais alguma velocidade? (s - sim/ n - não)");
+                fim = ReadLine();
+                if (fim == "s" || fim == "S" || fim == "sim" || fim =="SIM") { fim = "sim"; continue; }
+                else if (fim == "n" || fim == "N" || fim == "nao" || fim == "NAO" || fim == "não" || fim == "NÃO") { fim = "fim"; };
             }
-                
+            return fim;
         }
     }
 }
